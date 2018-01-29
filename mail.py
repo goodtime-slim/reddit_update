@@ -1,5 +1,5 @@
 import imaplib
-
+import re
 
 SMTP_SERVER = "imap.gmail.com"
 SMTP_PORT = 993
@@ -14,10 +14,12 @@ if mails[1][0]:
 else:
     ids = []
 
+regex = r"www\.reddit\.com\/r\/\w+\/\w+\/(\w+)"
+
 for id in ids:
     t, data = mail.fetch(id, '(RFC822)')
-    body = data[0][1]
-    print(body)
-
-
+    body = data[0][1].decode("utf-8")
+    matches = re.findall(regex, body)
+    comment = matches[0]
+    kill = 'kill' in body.lower()
 
