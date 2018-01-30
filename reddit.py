@@ -2,18 +2,12 @@ import praw
 
 reddit = praw.Reddit(client_id=CLIENT_ID,
                      client_secret=CLIENT_SECRET,
-                     password=PASSWORD,
+                     # password=PASSWORD,
                      user_agent=USER_AGENT,
-                     username=USERNAME)
+                     # username=USERNAME
+                     )
 
-submission = reddit.submission(id='7tnnv9')
-comments = submission.
-
-submission.comments()
-
-reddit = praw.Reddit(client_id=CLIENT_ID,
-                     client_secret=CLIENT_SECRET,
-                     redirect_uri='https://www.google.com',
-                     user_agent='updates by /u/goodtime_slim')
-x = reddit.auth.url(['identity'], '...', 'permanent')
-
+def get_comment_ids(thread_id):
+    submission = reddit.submission(id=thread_id)
+    submission.comments.replace_more(limit=None)
+    return submission.comments.list()

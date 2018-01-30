@@ -1,5 +1,6 @@
 import imaplib
 import re
+import praw
 
 SMTP_SERVER = "imap.gmail.com"
 SMTP_PORT = 993
@@ -20,6 +21,13 @@ for id in ids:
     t, data = mail.fetch(id, '(RFC822)')
     body = data[0][1].decode("utf-8")
     matches = re.findall(regex, body)
-    comment = matches[0]
+    thread = matches[0]
     kill = 'kill' in body.lower()
+    if kill:
+        kill(thread)
+    else:
+        comment_ids = get_comment_ids(thread_id)
+        insert_comment_ids(comment_ids)
+
+
 
