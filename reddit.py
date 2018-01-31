@@ -10,4 +10,6 @@ reddit = praw.Reddit(client_id=CLIENT_ID,
 def get_comment_ids(thread_id):
     submission = reddit.submission(id=thread_id)
     submission.comments.replace_more(limit=None)
-    return submission.comments.list()
+    comment_list = submission.comments.list()
+    ids = [(x.id,) for x in comment_list]
+    return ids

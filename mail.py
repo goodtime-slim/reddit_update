@@ -26,8 +26,8 @@ for id in ids:
     if kill:
         kill(thread)
     else:
-        comment_ids = get_comment_ids(thread_id)
-        insert_comment_ids(comment_ids)
+        comment_ids = get_comment_ids(thread)
+        insert_comment_ids(thread, comment_ids)
 
 
 
